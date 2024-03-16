@@ -74,7 +74,7 @@ class SortArray {
 
     
 
-    public int[] nonComparisonSort(int l) {
+  public int[] nonComparisonSort(int l) {
           // filter array to 2 arrays +ve , -ve
           int postive=0,negative=0;
           for(int i=0;i<array.length;i++)
@@ -110,7 +110,7 @@ class SortArray {
          
           for(int pos=1;maxp/pos>0;pos=pos*10)
           {
-              countSortHelpRadix(positives,pos);
+              countSortHelpRadix(positives,pos,l);
           }
           if (l==2||l==3) { System.out.print("positives after sorting:");
           printArray(positives);
@@ -118,7 +118,7 @@ class SortArray {
          
           for(int pos=1;maxn/pos>0;pos=pos*10)
           {
-                   countSortHelpRadix(negatives,pos);
+                   countSortHelpRadix(negatives,pos,l);
           }
           if (l==2||l==3) {  System.out.print("negatives after sorting:");
           printArray(negatives);}
@@ -145,23 +145,35 @@ class SortArray {
         }
         return max;
     }
-    private void countSortHelpRadix(int a[],int pos)
+    private void countSortHelpRadix(int a[],int pos,int l)
     {
-           int count[]=new int[10];
-           for(int i=0;i<10;i++)count[i]=0;
-           for(int i=0;i<a.length;i++)
-           {
-               ++count[(a[i]/pos)%10];
-           }
-           for(int i=1;i<10;i++)count[i]+=count[i-1];
-           int []b=new int[a.length];
-           for(int i=a.length-1;i>=0;i--)
-           {
-               b[--count[(a[i]/pos)%10]]=a[i];
-           }
-
-           for(int i=0;i<a.length;i++)a[i]=b[i];
+        int count[]=new int[10];
+        for(int i=0;i<10;i++)count[i]=0;
+        for(int i=0;i<a.length;i++)
+        {
+            ++count[(a[i]/pos)%10];
         }
+        if (l==2||l==3){
+        System.out.print((Math.log10(pos)+1)+" ith iteration\n the array: a");
+        printArray(a);
+        System.out.print("count array: ");
+        printArray(count);
+        }
+        for(int i=1;i<10;i++)count[i]+=count[i-1];
+        if (l==2||l==3){
+        System.out.print("after prefix sum to array count:");
+        printArray(count);}
+        int []b=new int[a.length];
+        for(int i=a.length-1;i>=0;i--)
+        {
+            b[--count[(a[i]/pos)%10]]=a[i];
+        }
+        if (l==2||l==3){
+        System.out.print("sorted a according to pos "+(Math.log10(pos)+1)+"\na:");
+        printArray(b);}
+
+        for(int i=0;i<a.length;i++)a[i]=b[i];
+    }
 
 
         void printArray(int[] arr) {
