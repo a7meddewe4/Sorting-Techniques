@@ -34,9 +34,6 @@ class SortArray {
       
     }
 
-    private void mergeSort(int i) {
-      
-    }
 
     
 
