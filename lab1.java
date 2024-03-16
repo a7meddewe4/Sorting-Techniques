@@ -74,18 +74,106 @@ class SortArray {
 
     
 
-    public int[] nonComparisonSort(int i) {
+    public int[] nonComparisonSort(int l) {
+          // filter array to 2 arrays +ve , -ve
+          int postive=0,negative=0;
+          for(int i=0;i<array.length;i++)
+          {
+             if(array[i]>=0)postive++;
+             else    negative++;
+          }
+          int positives[]=new int[postive];
+          int negatives[]=new int[negative];
+          int p=0,n=0;
+  
+          for(int i=0;i<array.length;i++)
+          {
+              if(array[i]>=0){
+                  positives[p++]=array[i];
+              }
+              else
+              {
+                  negatives[n++]=-1*array[i];
+              }
+          }
+          if (l==2||l==3) {
+            System.out.println("Fisrt split array to positives and negatives");
+            System.out.print("positives: ");
+            printArray(positives);
+            System.out.print("abs(negatives): ");
+            printArray(negatives);
+          }
+         
+          int maxp=getmax(positives);
+          int maxn=getmax(negatives);
+          if (l==2||l==3) { System.out.println("first thing to sort positives using radix sort");}
+         
+          for(int pos=1;maxp/pos>0;pos=pos*10)
+          {
+              countSortHelpRadix(positives,pos);
+          }
+          if (l==2||l==3) { System.out.print("positives after sorting:");
+          printArray(positives);
+          System.out.println("second thing to sort negatives using radix sort");}
+         
+          for(int pos=1;maxn/pos>0;pos=pos*10)
+          {
+                   countSortHelpRadix(negatives,pos);
+          }
+          if (l==2||l==3) {  System.out.print("negatives after sorting:");
+          printArray(negatives);}
+        
+          int i=0;
+          while(n-1>=0)
+          {
+            array[i++]=negatives[--n]*-1;
+          }
+          for(int k=0;k<positives.length;k++)
+          {
+            array[i++]=positives[k];
+          }
+         
         return array;
        
     }
-
-
-    void printArray(int[] array) {
-        for (int num : array) {
-            System.out.print(num + " ");
+    private int getmax(int arr[])
+    {
+        int max = Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(max<arr[i])max=arr[i];
         }
-        System.out.println();
+        return max;
     }
+    private void countSortHelpRadix(int a[],int pos)
+    {
+           int count[]=new int[10];
+           for(int i=0;i<10;i++)count[i]=0;
+           for(int i=0;i<a.length;i++)
+           {
+               ++count[(a[i]/pos)%10];
+           }
+           for(int i=1;i<10;i++)count[i]+=count[i-1];
+           int []b=new int[a.length];
+           for(int i=a.length-1;i>=0;i--)
+           {
+               b[--count[(a[i]/pos)%10]]=a[i];
+           }
+
+           for(int i=0;i<a.length;i++)a[i]=b[i];
+        }
+
+
+        void printArray(int[] arr) {
+            System.out.print("[ ");
+            for (int i = 0; i < arr.length; i++) {
+                System.out.print(arr[i]);
+                if (i < arr.length - 1) {
+                    System.out.print(" , ");
+                }
+            }
+            System.out.println(" ]");
+        }
 }
 
 public class lab1 {
@@ -204,7 +292,6 @@ public class lab1 {
                         
                         case 2:
                         sortedArray = sortArray.nonComparisonSort(2); 
-                        sortArray.printArray(sortedArray);
                         break;
                         case 3:
                         sortedArray = sortArray.nonComparisonSort(3);
