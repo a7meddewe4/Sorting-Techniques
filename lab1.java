@@ -129,16 +129,16 @@ public class lab1 {
                     } 
                     switch (choice3) {
                         case 1:
-                        sortedArray = sortArray.simpleSort(1); 
+                        sortedArray = sortArray.efficientSort(1); 
                         sortArray.printArray(sortedArray);
                             break;
                         
                         case 2:
-                        sortedArray = sortArray.simpleSort(2); 
+                        sortedArray = sortArray.efficientSort(2); 
                         sortArray.printArray(sortedArray);
                         break;
                         case 3:
-                        sortedArray = sortArray.simpleSort(3);
+                        sortedArray = sortArray.efficientSort(3);
                         sortArray.printArray(sortedArray);
                         break; 
                         case 4:
@@ -162,16 +162,16 @@ public class lab1 {
                     } 
                     switch (choice4) {
                         case 1:
-                        sortedArray = sortArray.simpleSort(1); 
+                        sortedArray = sortArray.nonComparisonSort(1); 
                         sortArray.printArray(sortedArray);
                             break;
                         
                         case 2:
-                        sortedArray = sortArray.simpleSort(2); 
+                        sortedArray = sortArray.nonComparisonSort(2); 
                         sortArray.printArray(sortedArray);
                         break;
                         case 3:
-                        sortedArray = sortArray.simpleSort(3);
+                        sortedArray = sortArray.nonComparisonSort(3);
                         sortArray.printArray(sortedArray);
                         break; 
                         case 4:
