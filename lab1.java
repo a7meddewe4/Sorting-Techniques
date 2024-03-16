@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 class SortArray {
@@ -14,7 +16,9 @@ class SortArray {
     private void readInputFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
-            String[] elements = line.split(",");
+            String line2=line.substring(1, line.length()-1);
+        //    System.out.println(line2);
+            String[] elements = line2.split(",");
             array = new int[elements.length];
             for (int i = 0; i < elements.length; i++) {
                 array[i] = Integer.parseInt(elements[i]);
@@ -25,8 +29,41 @@ class SortArray {
     }
 
     public int[] simpleSort(int i) {
-        return array;
-      
+        if(i==1||i==3){
+        int n = array.length;
+        for (int l = 1; l < n; l++) {
+            int key = array[l];
+            int index = l - 1;
+            while (index >= 0 && array[index] < key) {
+                array[index + 1] = array[index];
+                index--;
+            }
+            array[index + 1] = key;
+        }
+    }
+     if (i==2 ||i==3) {
+        int n = array.length;
+        List<int[]> output = new ArrayList<>();
+        output.add(array.clone());
+        for (int k = 1; k < n; k++) {
+            int key = array[k];
+            int index = k - 1;
+            while (index >= 0 && array[index] < key) {
+                array[index + 1] = array[index];
+                index--;
+            }
+            array[index + 1] = key;
+            output.add(array.clone());
+        }
+        for (int[] num : output) {
+            for(int m :num){
+                System.out.print(m + " ");
+            }
+            System.out.println();
+        }
+       
+    }
+    return array;
     }
 
     public int[] efficientSort(int i) {
@@ -101,7 +138,6 @@ public class lab1 {
                             
                             case 2:
                             sortedArray = sortArray.simpleSort(2); 
-                            sortArray.printArray(sortedArray);
                             break;
                             case 3:
                             sortedArray = sortArray.simpleSort(3);
