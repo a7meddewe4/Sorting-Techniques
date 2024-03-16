@@ -12,8 +12,8 @@ class SortArray {
     public SortArray(String filePath) {
         readInputFile(filePath);
     }
-
-    private void readInputFile(String filePath) {
+ 
+    private void readInputFile(String filePath) {              //to read the array from the file 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             String line2=line.substring(1, line.length()-1);
@@ -27,9 +27,9 @@ class SortArray {
             e.printStackTrace();
         }
     }
-
-    public int[] simpleSort(int i) {
-        if(i==1||i==3){
+ 
+    public int[] simpleSort(int i) {             
+        if(i==1||i==3){                                           // if 1 or 3 it will sort the array and return final array
         int n = array.length;
         for (int l = 1; l < n; l++) {
             int key = array[l];
@@ -41,7 +41,7 @@ class SortArray {
             array[index + 1] = key;
         }
     }
-     if (i==2 ||i==3) {
+     if (i==2 ||i==3) {                                          //if 2 or 3 it will return subarrays 
         int n = array.length;
         List<int[]> output = new ArrayList<>();
         output.add(array.clone());
@@ -100,8 +100,8 @@ public class lab1 {
         while (true) {
             System.out.println("\n--- Sorting Algorithms Menu ---");
             System.out.println("1. Simple Sort (O(n^2))");
-            System.out.println("2. Efficient Sort (O(n log n)");
-            System.out.println("3. Non-Comparison Sort (O(n)");
+            System.out.println("2. Efficient Sort (O(n log n))");
+            System.out.println("3. Non-Comparison Sort (O(n))");
             System.out.println("4. Exit");
             System.out.flush();
 
